@@ -15,8 +15,7 @@ This is a simple **Weather-App**, while shows the weather report of a city by it
 
 
 ### Screenshort
-
-![Screenshot (1)](https://user-images.githubusercontent.com/100186167/174087236-3c7e5d9c-16fb-4627-ba74-42a9d1824b0b.png)
+![Screenshot (2)](https://user-images.githubusercontent.com/100186167/174088687-b417a809-3545-485d-9c69-3aef9a8d3aff.png)
 
 
 ### Deployed site
