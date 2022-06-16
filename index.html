@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    #cont{
+        display: flex;
+        width: 100%;
+        justify-content: space-around;
+        margin-top: 1%;
+    }
+
+
+    #input{
+        width:auto;
+        margin: auto;
+        text-align: center;
+    }
+    #div1{
+        width: auto;
+        /* border: 1px solid black; */
+        color: aliceblue;
+        box-sizing: border-box;
+        padding: 2px;
+        box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+        text-align: center;
+
+    }
+    #tempmin{
+        font-size: 40px;
+    }
+    #div2{
+        width: auto;
+        height: 300px;
+        border: 1px solid rgb(212, 204, 204);
+  
+    }
+    #city{
+        width: 250px;
+        height: 30px;
+        border-radius: 20px;
+        font-size: 20px;
+    }
+    button{
+        color: blue;
+        background-color: white;
+        height: 33px;
+        width: 250px;
+        box-shadow: rgba(68, 66, 66, 0.2) 0px 2px 8px 0px;
+        border-radius: 30px;
+    }
+    h1{
+       text-align: center;
+    }
+
+    /* 7days */
+
+    #cont2{
+        display: flex;
+        box-sizing: border-box;
+        width: 100%;
+        height: auto;
+        /* padding: 1%;
+        height: auto; */
+        justify-content: space-around;
+        margin-top: 1%;
+        font-size: 20px;
+        font-weight: bold;
+        color: white;
+        /* background-color: rgb(75, 73, 73); */
+       
+        font-family: sans-serif;
+      
+    }
+    #x{
+        text-align: center;
+      
+        font-family: sans-serif;
+        font-weight: bold;
+        /* border: 1px solid red; */
+    }
+
+    #input{
+        width:auto;
+        margin: auto;
+        text-align: center;
+    }
+    #div71,#div72,#div73,#div74,#div75,#div76,#div77{
+        /* border: 1px solid rgb(114, 111, 111); */
+        box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+        padding: 0.5%;
+        height: auto;
+    }
+  
+ 
+ 
+    #city{
+        width: 250px;
+        height: 30px;
+        border-radius: 20px;
+        font-size: 20px;
+    }
+    button{
+        color: blue;
+        background-color: white;
+        height: 33px;
+        width: 250px;
+        box-shadow: rgba(68, 66, 66, 0.2) 0px 2px 8px 0px;
+        border-radius: 30px;
+    }
+   #maindiv{
+
+    
+    background-image: url("https://wallpaperaccess.com/full/3364029.jpg");
+    width: 100%;
+    height: 750px;
+    color: white;
+    
+   }
+
+</style>
+<body>
+
+<div id="maindiv">
+
+    <div id="input">
+    <h1>Weather Report</h1>
+
+    <input type="text" id="city" placeholder="Enter city name here"/>
+    
+    <button onclick="getWeather()" >Get Weather</button>
+
+    </div>
+
+    <div id="cont"></div>
+    <div id="x"></div>
+    <div id="cont2"></div>
+
+</div>
+
+</body>
+</html>
+
+<script>
+
+async function getWeather(){
+
+
+    try{
+
+        let city = document.getElementById("city").value
+
+        let res = await fetch(
+            `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=f265bf969578000afbdeee1614f52df8&units=metric`)
+    
+
+    let data = await res.json();
+
+    appendData(data);
+
+    console.log("data:",data);
+
+    }catch(err){
+        console.log("err:",err);
+   }
+
+        try{
+
+        
+        let city = document.getElementById("city").value
+
+        let res = await fetch(
+            `https://api.openweathermap.org/data/2.5/forecast?q=${city}&cnt=7&appid=f265bf969578000afbdeee1614f52df8&units=metric`)
+
+
+        let data7 = await res.json();
+
+        appendData7(data7);
+
+        console.log("data7:",data7);
+
+        }catch(err){
+        console.log("er7r:",err);
+        }
+
+}
+
+function appendData(data){
+
+    cont.innerHTML = null;
+
+    let div1 = document.createElement("div");
+    div1.setAttribute("id","div1")
+
+
+    let div2 = document.createElement("div");
+    div2.setAttribute("id","div2")
+
+
+    // let name = document.createElement("h3");
+    // name.innerText = `City: ${data.name}`
+   
+
+
+    let temp_min = document.createElement("h3");
+    temp_min.innerText = `${data.main.temp_min} C`
+    temp_min.setAttribute("id","tempmin")
+
+
+
+    let temp_max = document.createElement("h3");
+    temp_max.innerText =  `Max Temperature: ${data.main.temp_max}`
+   
+
+
+
+    let wind_deg = document.createElement("h3");
+    wind_deg.innerText = `Wind deg: ${data.wind.deg}`
+
+    let wind_speed = document.createElement("h3");
+    wind_speed.innerText = `Wind speed: ${ data.wind.speed}`
+
+    let clouds = document.createElement("h3");
+    clouds.innerText =  `Clouds : ${data.clouds.all}`
+
+    let sunrise = document.createElement("h3");
+    sunrise.innerText = `Sunrise: ${data.sys.sunrise}`
+
+    let sunset = document.createElement("h3");
+    sunset.innerText = `Sunset: ${data.sys.sunset}`
+
+    let iframe = document.createElement("iframe");
+
+    iframe.src = `https://maps.google.com/maps?q=${data.name}&t=&z=13&ie=UTF8&iwloc=&output=embed`;
+    //src="https://maps.google.com/maps?q=${data.name}&t=&z=13&ie=UTF8&iwloc=&output=embed
+
+    iframe.height = `350px`;
+
+    iframe.width = `600px`;
+
+    div1.append(name,temp_min,temp_max,wind_deg, wind_speed,clouds, sunrise, sunset)
+    div2.append(iframe)
+
+    document.querySelector("#cont").append(div1,div2)
+    }
+
+
+
+function appendData7(data){
+
+cont2.innerHTML = null;
+x.innerHTML = null;
+
+let name = document.createElement("div")
+name.setAttribute("id","cityname")
+
+
+let daily = document.createElement("h2");
+daily.innerText = "Daily"
+
+let div71 = document.createElement("div");
+div71.setAttribute("id","div71")
+div71.innerText="Mon"
+
+
+let div72 = document.createElement("div");
+div72.setAttribute("id","div72")
+div72.innerText="Tue"
+
+
+let div73 = document.createElement("div");
+div73.setAttribute("id","div73")
+div73.innerText="Wed"
+
+
+let div74 = document.createElement("div");
+div74.setAttribute("id","div74")
+div74.innerText="Thu"
+
+let div75 = document.createElement("div");
+div75.setAttribute("id","div75")
+div75.innerText="Fri"
+
+
+let div76 = document.createElement("div");
+div76.setAttribute("id","div76")
+div76.innerText="Sat"
+
+
+let div77 = document.createElement("div");
+div77.setAttribute("id","div77")
+div77.innerText="Sun"
+
+
+let Mtemp_max = document.createElement("p");
+Mtemp_max.innerText =  `Max Temp: ${data.list[0].main.temp}`
+
+let Mtemp_min = document.createElement("p");
+Mtemp_min.innerText = `Min Temp: ${data.list[0].main.temp_min}`
+
+
+
+let Ttemp_max = document.createElement("p");
+Ttemp_max.innerText =  `Max Temp: ${data.list[1].main.temp}`
+
+let Ttemp_min = document.createElement("p");
+Ttemp_min.innerText = `Min Temp: ${data.list[1].main.temp_min}`
+
+
+
+let Wtemp_max = document.createElement("p");
+Wtemp_max.innerText =  `Max Temp: ${data.list[2].main.temp}`
+
+let Wtemp_min = document.createElement("p");
+Wtemp_min.innerText = `Min Temp: ${data.list[2].main.temp_min}`
+
+
+
+let Thtemp_max = document.createElement("p");
+Thtemp_max.innerText =  `Max Temp: ${data.list[3].main.temp}`
+
+let Thtemp_min = document.createElement("p");
+Thtemp_min.innerText = `Min Temp: ${data.list[3].main.temp_min}`
+
+
+
+let Ftemp_max = document.createElement("p");
+Ftemp_max.innerText =  `Max Temp: ${data.list[4].main.temp}`
+
+let Ftemp_min = document.createElement("p");
+Ftemp_min.innerText = `Min Temp: ${data.list[4].main.temp_min}`
+
+
+
+let Stemp_max = document.createElement("p");
+Stemp_max.innerText =  `Max Temp: ${data.list[5].main.temp}`
+
+let Stemp_min = document.createElement("p");
+Stemp_min.innerText = `Min Temp: ${data.list[5].main.temp_min}`
+
+
+let Suntemp_max = document.createElement("p");
+Suntemp_max.innerText =  `Max Temp: ${data.list[6].main.temp}`
+
+let Suntemp_min = document.createElement("p");
+Suntemp_min.innerText = `Min Temp: ${data.list[6].main.temp_min}`
+
+div71.append(Mtemp_max,Mtemp_min)
+
+div72.append(Ttemp_max,Ttemp_min)
+
+div73.append(Wtemp_max,Wtemp_min)
+
+div74.append(Thtemp_max,Thtemp_min)
+
+div75.append(Ftemp_max,Ftemp_min)
+
+div76.append(Stemp_max,Stemp_min)
+
+div77.append(Suntemp_max,Suntemp_min)
+
+document.querySelector("#x").append(daily)
+document.querySelector("#cont2").append(div71,div72,div73,div74,div75,div76,div77)
+}
+
+
+
+
+</script>
