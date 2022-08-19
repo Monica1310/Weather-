@@ -20,5 +20,5 @@ This is a simple **Weather-App**, while shows the weather report of a city by it
 
 ### Deployed site
 
-[Deployed Link of website](https://elaborate-pie-807f8a.netlify.app/)
+[Deployed Link of website](https://splendorous-tanuki-608435.netlify.app/)
 
